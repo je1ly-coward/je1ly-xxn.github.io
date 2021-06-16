@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="qian"><meta name="description" content="怀揣希望去努力，静待美好出现"><link rel="alternative" href="/atom.xml" title="Je1ly" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>re-CrackRTF - Je1ly</title>
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
+<!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]-->
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+<script src="/js/fancybox/jquery.fancybox.min.js"></script>
+<meta name="generator" content="Hexo 5.3.0"></head><body style="opacity:0"><header class="head"><h1 class="head-title u-fl"><a href="/">Je1ly</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a class="head-nav__link" href="/tags">标签</a></li><li class="head-nav__item"><a class="head-nav__link" href="/archives">目录</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time class="post__time" datetime="2021-04-27T09:17:39.000Z">2021 - 04 - 27 17:17:39</time><h1 class="post__title"><a href="/2021/04/27/CrackRTF/">re-CrackRTF</a></h1><div class="post__main echo"><p>放进IDA中，然后找到关键函数<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/gCPh8O"><img src="https://z3.ax1x.com/2021/04/27/gCPh8O.png" alt="gCPh8O.png"></a><br>可以看到25行处有一个函数，对字符串进行加密<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/gCimM4"><img src="https://z3.ax1x.com/2021/04/27/gCimM4.png" alt="gCimM4.png"></a><br>（当时自己写的时候没看懂，后面看wp才明白是sha1加密）通过写解密代码可得passwd1<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/gCigyQ"><img src="https://z3.ax1x.com/2021/04/27/gCigyQ.png" alt="gCigyQ.png"></a><br>由15的判断语句可得长度为6，而且&gt;100000<br>sha1的python加密方式还有另一种</p>
+<p>from hashlib import sha1</p>
+<p>#给password加密<br>s1 = sha1()  #创建sha1加密对象<br>s1.update(password.encode(“utf-8”))   #转码（字节流）<br>password2 = s1.hexdigest()        #将字节码转成16进制</p>
+<p>之后看到40行也是加密函数和第一个加密函数差不多，43行又有一个，<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/gCkC40"><img src="https://z3.ax1x.com/2021/04/27/gCkC40.png" alt="gCkC40.png"></a><br>关键位置再23行，整个exe文件需要输入两次passwd，都成功后会出现一个“dbapp.rtf”的文件，所以得找到passwd2，又点进22行代码<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/gCkYbd"><img src="https://z3.ax1x.com/2021/04/27/gCkYbd.png" alt="gCkYbd.png"></a><br>发现是异或处理，是AAA和第二个（也是看的wp知道的，因为是rtf文件，所以搜索rtf头文件）进行异或处理。<br>然后写代码<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/gCA5FI"><img src="https://z3.ax1x.com/2021/04/27/gCA5FI.png" alt="gCA5FI.png"></a><br>最后得到两个passwd之后，打开exe文件，输入后可得到dbapp.rtf文件，打开就有flag</p>
+</div></header><footer class="post__foot u-cf"><ul class="post__tag u-fl"><li class="post__tag__item"><a class="post__tag__link" href="/tags/BUUCTF/">BUUCTF</a></li></ul></footer></article></main><footer class="foot"><div class="foot-copy">&copy; 2020 - 2021 qian</div></footer>
+<script src="/js/scroller.js"></script>
+
+<script src="/js/main.js"></script>
+</body></html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="qian"><meta name="description" content="怀揣希望去努力，静待美好出现"><link rel="alternative" href="/atom.xml" title="Je1ly" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>gdb调试 - Je1ly</title>
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
+<!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]-->
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+<script src="/js/fancybox/jquery.fancybox.min.js"></script>
+<meta name="generator" content="Hexo 5.3.0"></head><body style="opacity:0"><header class="head"><h1 class="head-title u-fl"><a href="/">Je1ly</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a class="head-nav__link" href="/tags">标签</a></li><li class="head-nav__item"><a class="head-nav__link" href="/archives">目录</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time class="post__time" datetime="2021-05-10T13:45:37.000Z">2021 - 05 - 10 21:45:37</time><h1 class="post__title"><a href="/2021/05/10/gdb%E8%B0%83%E8%AF%95/">gdb调试</a></h1><div class="post__main echo"><p>GDB（GNU symbolic debugger）是 GNU Project 调试器，它使你可以查看另一个程序在“执行”期间正在执行的操作–或该程序崩溃时正在执行的操作。<br>（一） 启动你的程序，并指定可能影响其行为的所有内容。<br>（二） 使程序在指定条件下停止。<br>（三） 检查程序停止时发生的情况。<br>（四） 更改程序中的内容，以便你可以尝试纠正一个错误的影响，然后继续学习另一个错误。</p>
+<h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><p>run（简写 r）： 其作用是运行程序，当遇到断点后，程序会在断点处停止运行，等待用户输入下一步的命令<br>continue （简写c ）：<br>继续执行，到下一个断点处（或运行结束）<br>next（简写 n）：<br>单步跟踪程序，当遇到函数调用时，也不进入此函数体<br>（此命令同 step 的主要区别是，step 遇到用户自定义的函数，将步进到函数中去运行，而 next 则直接调用函数，不会进入到函数体内。）<br>step（简写s）：<br>单步调试如果有函数调用，则进入函数<br>until：<br>这个命令可以运行程序直到退出循环体<br>until+行号：<br>运行至某行，不仅仅用来跳出循环<br>finish： 运行程序，直到当前函数完成返回，并打印函数返回时的堆栈地址和返回值及参数值等信息。<br>call 函数(参数)：<br>调用程序中可见的函数，并传递“参数”，如：call gdb_test(55)<br>quit（简写 q）：<br>退出gdb</p>
+<p>break n （简写b n）:<br>在第n行处设置断点（可以带上代码路径和代码名称： b OAGUPDATE.cpp:578）<br>b fn1 if a＞b：<br>条件断点设置<br>break 函数（break缩写为b）：<br>在函数的入口处设置断点<br>delete 断点号n：删除第n个断点<br>disable 断点号n：暂停第n个断点<br>enable 断点号n：开启第n个断点<br>clear 行号n：清除第n行的断点<br>delete breakpoints：清除所有断点</p>
+<p>list ：（简写 l）其作用就是列出程序的源代码，默认每次显示10行<br>list 行号：<br>将显示当前文件以“行号”为中心的前后10行代码<br>list 函数名：<br>将显示“函数名”所在函数的源代码<br>list ：<br>不带参数，将接着上一次 list 命令的，输出下边的内容。<br>info（或i） locals     ：<br>查看当前栈帧局部变量的值<br>set var :<br>修改变量的值</p>
+<h2 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h2><p>一、启动gdb（Linux中）<br><strong>gdb test/gdb -q test</strong><br>二、查看源码<br><strong>list l</strong><br>三、运行程序<br><strong>run(r)</strong><br>四、设置断点<br><strong>break(b) + 位置</strong><br>五、单步执行<br>continue、step、next命令<br>六、查看变量</p>
+<p>七、退出gdb<br>quit(q)</p>
+</div></header><footer class="post__foot u-cf"><ul class="post__tag u-fl"><li class="post__tag__item"><a class="post__tag__link" href="/tags/%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/">工具的使用</a></li></ul></footer></article></main><footer class="foot"><div class="foot-copy">&copy; 2020 - 2021 qian</div></footer>
+<script src="/js/scroller.js"></script>
+
+<script src="/js/main.js"></script>
+</body></html>

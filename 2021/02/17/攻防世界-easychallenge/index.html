@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="qian"><meta name="description" content="怀揣希望去努力，静待美好出现"><link rel="alternative" href="/atom.xml" title="Je1ly" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>crypto-easychallenge - Je1ly</title>
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
+<!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]-->
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+<script src="/js/fancybox/jquery.fancybox.min.js"></script>
+<meta name="generator" content="Hexo 5.3.0"></head><body style="opacity:0"><header class="head"><h1 class="head-title u-fl"><a href="/">Je1ly</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a class="head-nav__link" href="/tags">标签</a></li><li class="head-nav__item"><a class="head-nav__link" href="/archives">目录</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time class="post__time" datetime="2021-02-17T13:55:15.000Z">2021 - 02 - 17 21:55:15</time><h1 class="post__title"><a href="/2021/02/17/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-easychallenge/">crypto-easychallenge</a></h1><div class="post__main echo"><h3 id="easychanllenge"><a href="#easychanllenge" class="headerlink" title="easychanllenge"></a>easychanllenge</h3><p><strong>关于pyc（python文件）的反编译</strong><br>首先先在线上反编译网站对pyc文件进行解密<br>    import base64</p>
+<p>def encode1(ans):<br>    s = ‘’<br>    for i in ans:<br>        x = ord(i) ^ 36<br>        x = x + 25<br>        s += chr(x)</p>
+<pre><code>return s
+</code></pre>
+<p>def encode2(ans):<br>    s = ‘’<br>    for i in ans:<br>        x = ord(i) + 36<br>        x = x ^ 36<br>        s += chr(x)</p>
+<pre><code>return s
+</code></pre>
+<p>def encode3(ans):<br>    return base64.b32encode(ans)</p>
+<p>flag = ‘ ‘<br>print ‘Please Input your flag:’<br>flag = raw_input()<br>final = ‘UC7KOWVXWVNKNIC2XCXKHKK2W5NLBKNOUOSK3LNNVWW3E===’<br>if encode3(encode2(encode1(flag))) == final:<br>    print ‘correct’<br>else:<br>    print ‘wrong’</p>
+<p>对这个python文件进行解密<br><a target="_blank" rel="noopener" href="https://imgchr.com/i/yRJ46H"><img src="https://s3.ax1x.com/2021/02/18/yRJ46H.png" alt="yRJ46H.png"></a><br>在这个过程中，自己没写出来的是对<u> ^ </u>的解密手法不熟练<br>+和-的对象必须是整型，而^使用时对象都是使用二进制，会自动转换</p>
+</div></header><footer class="post__foot u-cf"><ul class="post__tag u-fl"><li class="post__tag__item"><a class="post__tag__link" href="/tags/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/">攻防世界</a></li></ul></footer></article></main><footer class="foot"><div class="foot-copy">&copy; 2020 - 2021 qian</div></footer>
+<script src="/js/scroller.js"></script>
+
+<script src="/js/main.js"></script>
+</body></html>

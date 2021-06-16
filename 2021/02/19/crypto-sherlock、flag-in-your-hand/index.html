@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="qian"><meta name="description" content="怀揣希望去努力，静待美好出现"><link rel="alternative" href="/atom.xml" title="Je1ly" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>crypto-sherlock、flag_in_your_hand - Je1ly</title>
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
+<!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]-->
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+<script src="/js/fancybox/jquery.fancybox.min.js"></script>
+<meta name="generator" content="Hexo 5.3.0"></head><body style="opacity:0"><header class="head"><h1 class="head-title u-fl"><a href="/">Je1ly</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a class="head-nav__link" href="/tags">标签</a></li><li class="head-nav__item"><a class="head-nav__link" href="/archives">目录</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time class="post__time" datetime="2021-02-19T13:44:01.000Z">2021 - 02 - 19 21:44:01</time><h1 class="post__title"><a href="/2021/02/19/crypto-sherlock%E3%80%81flag-in-your-hand/">crypto-sherlock、flag_in_your_hand</a></h1><div class="post__main echo"><p>##Sherlock<br>首先下载文件发现是一篇英文<br><a target="_blank" rel="noopener" href="https://imgchr.com/i/yhb4dU"><img src="https://s3.ax1x.com/2021/02/19/yhb4dU.png" alt="yhb4dU.png"></a><br>一开始我也没有发现这篇文章是什么密码，看别人博客才知道，<strong>要注意观察文章的特征</strong><br><u>整篇英文出现了很多不同的大写字母</u><br>接下来复制到kali中<br>使用命令**cat 文件名 | grep -Eo ‘[A-Z]’ |tr -d ‘\n’**将大写字母提出来</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/yhqtkF"><img src="https://s3.ax1x.com/2021/02/19/yhqtkF.png" alt="yhqtkF.png"></a><br>发现是一串 ZERO 和 ONE　<br>直接转化成０１后摩斯解密<br>就得到ｆｌａｇ</p>
+<p>##flag_in_your_hand<br>下载后是一个压缩包，压缩包里有ｈｔｍｌ和ｊｓ文件，打开网页后发现需要输入密码，才能得到ｆｌａｇ，之后再代码中发现原理<br><a target="_blank" rel="noopener" href="https://imgchr.com/i/yhLA39"><img src="https://s3.ax1x.com/2021/02/19/yhLA39.png" alt="yhLA39.png"></a><br>需要找到正确的ic才可以得到flag，<br>接下来看js文件中，找到ic的正确值<br><a target="_blank" rel="noopener" href="https://imgchr.com/i/yhLYut"><img src="https://s3.ax1x.com/2021/02/19/yhLYut.png" alt="yhLYut.png"></a><br>然后写脚本解密<br>    a=[118, 104, 102, 120, 117, 108, 119, 124, 48, 123, 101, 120]<br>s=’’<br>for i in a:<br>    s+=chr(i-3)<br>print(s)<br>就得到flag</p>
+</div></header><footer class="post__foot u-cf"><ul class="post__tag u-fl"><li class="post__tag__item"><a class="post__tag__link" href="/tags/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/">攻防世界</a></li></ul></footer></article></main><footer class="foot"><div class="foot-copy">&copy; 2020 - 2021 qian</div></footer>
+<script src="/js/scroller.js"></script>
+
+<script src="/js/main.js"></script>
+</body></html>
